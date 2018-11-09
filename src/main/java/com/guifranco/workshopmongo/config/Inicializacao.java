@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.guifranco.workshopmongo.dominios.Post;
 import com.guifranco.workshopmongo.dominios.User;
+import com.guifranco.workshopmongo.dto.AutorDTO;
 import com.guifranco.workshopmongo.repositorios.PostRepositorio;
 import com.guifranco.workshopmongo.repositorios.UserRepositorio;
 
@@ -37,13 +38,14 @@ public class Inicializacao implements CommandLineRunner {
 		
 		userRepositorio.saveAll(Arrays.asList(maria, alex, bob));
 		
-		Post post1 = new Post(null, maria,  dataHoraAgora, "Partiu viagem", "Vou viajar para São Paulo. Abraços!");
-		Post post2 = new Post(null, maria,  dataHoraAgora, "Bom dia", "Acordei feliz hoje!");
-		
-		userRepositorio.saveAll(Arrays.asList(maria, alex, bob));
+		Post post1 = new Post(null, new AutorDTO(maria),  dataHoraAgora, "Partiu viagem", "Vou viajar para São Paulo. Abraços!");
+		Post post2 = new Post(null, new AutorDTO(maria),  dataHoraAgora, "Bom dia", "Acordei feliz hoje!");
+				
 		postRepositorio.saveAll(Arrays.asList(post1, post2));
 		
+		maria.getPosts().addAll(Arrays.asList(post1, post2));
+		userRepositorio.save(maria);
+		
 	}
-
 	
 }
