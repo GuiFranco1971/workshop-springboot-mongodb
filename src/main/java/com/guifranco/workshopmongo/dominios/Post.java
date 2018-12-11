@@ -1,12 +1,15 @@
 package com.guifranco.workshopmongo.dominios;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.guifranco.workshopmongo.dto.AutorDTO;
+import com.guifranco.workshopmongo.dto.CommentDTO;
 
 @Document
 public class Post implements Serializable {
@@ -19,6 +22,8 @@ public class Post implements Serializable {
 	private Date data;
 	private String titulo;
 	private String msg;
+	
+	private List<CommentDTO> comments = new ArrayList<>();
 		
 	public Post() {
 	}
@@ -75,6 +80,14 @@ public class Post implements Serializable {
 		return serialVersionUID;
 	}
 
+	public List<CommentDTO> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentDTO> comments) {
+		this.comments = comments;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
